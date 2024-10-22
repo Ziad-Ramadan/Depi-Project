@@ -7,28 +7,22 @@ from nltk.corpus import stopwords
 import nltk
 import os
 
-# Download stopwords for NLTK
 nltk.download('stopwords')
 
-# Google Drive file ID for the sentiment_model.pkl file
 file_id = '18IHEKb43uakOFB1VMH6XLnkldBAZJgfi'
 model_path = 'sentiment_model.pkl'
 
-# Function to download the model from Google Drive if it doesn't exist locally
 def download_model_from_drive():
     if not os.path.exists(model_path):
         url = f"https://drive.google.com/uc?id={file_id}"
         gdown.download(url, model_path, quiet=False)
 
-# Download the model
 download_model_from_drive()
 
-# Load the BERT tokenizer and model
 tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
 device = torch.device("cpu")
 model = None
 
-# Try to load the model
 try:
     model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=3)  
     model.load_state_dict(torch.load(model_path, map_location=device))  
@@ -37,7 +31,6 @@ try:
 except Exception as e:
     st.error(f"Error loading model: {e}")
 
-# Preprocessing function
 def preprocess_text(text):
     text = text.lower()
     text = re.sub(r'[^\w\s]', '', text)

@@ -10,6 +10,10 @@ with open("sentiment_model.pkl", "rb") as f:
 # Load the tokenizer from Hugging Face
 tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
 
+device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+model.to(device)
+
+
 # Set the model to evaluation mode
 model.eval()
 

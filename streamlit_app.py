@@ -55,7 +55,7 @@ if model is not None:
         return predictions
 
     # Streamlit UI
-    st.title("Sentiment Analysis with BERT : 0 is Negative, 1 is Neutral, and 2 is Positive")
+    st.title("Sentiment Analysis with BERT")
     user_input = st.text_area("Enter text for sentiment analysis:")
 
     if st.button("Analyze"):

@@ -1,0 +1,8 @@
+streamlit
+torch
+re
+gdown
+transformers 
+nltk.corpus
+nltk
+os

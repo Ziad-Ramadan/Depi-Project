@@ -1,7 +1,5 @@
 streamlit
 torch
 gdown
-transformers 
-nltk.corpus
+transformers
 nltk
-os

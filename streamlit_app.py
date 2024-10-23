@@ -66,7 +66,6 @@ if model is not None:
         else:
             st.write("Please enter some text.")
 else:
-    st.write("The model could not be loaded. Please check the model file.")
     st.write("Please enter some text.")
-else:
+elif:
     st.write("The model could not be loaded. Please check the model file.")

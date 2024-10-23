@@ -1,7 +1,7 @@
 import streamlit as st
 import torch
 import re
-import gdown  # Import gdown for Google Drive downloads
+import gdown  
 from transformers import BertTokenizerFast, BertForSequenceClassification
 from nltk.corpus import stopwords
 import nltk
@@ -40,7 +40,6 @@ def preprocess_text(text):
     
     return text
 
-# Predict sentiment if model is loaded successfully
 if model is not None:
     def predict_sentiment(text):
         preprocessed_text = preprocess_text(text)
@@ -52,7 +51,8 @@ if model is not None:
             logits = outputs.logits
             predictions = torch.argmax(logits, dim=1).item()
         
-        return predictions
+        sentiment_dict = {0: "Negative", 1: "Neutral", 2: "Positive"}
+        return sentiment_dict[predictions]
 
     # Streamlit UI
     st.title("Sentiment Analysis with BERT")
@@ -63,6 +63,10 @@ if model is not None:
             sentiment = predict_sentiment(user_input)
             st.write(f"Sentiment: {sentiment}")
         else:
+            st.write("Please enter some text.")
+else:
+    st.write("The model could not be loaded. Please check the model file.")
+
             st.write("Please enter some text.")
 else:
     st.write("The model could not be loaded. Please check the model file.")

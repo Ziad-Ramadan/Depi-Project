@@ -1,7 +1,7 @@
 import streamlit as st
 import torch
 import re
-import gdown  
+import gdown  # Import gdown for Google Drive downloads
 from transformers import BertTokenizerFast, BertForSequenceClassification
 from nltk.corpus import stopwords
 import nltk
@@ -40,6 +40,7 @@ def preprocess_text(text):
     
     return text
 
+# Predict sentiment if model is loaded successfully
 if model is not None:
     def predict_sentiment(text):
         preprocessed_text = preprocess_text(text)
@@ -66,7 +67,6 @@ if model is not None:
             st.write("Please enter some text.")
 else:
     st.write("The model could not be loaded. Please check the model file.")
-
-            st.write("Please enter some text.")
+    st.write("Please enter some text.")
 else:
     st.write("The model could not be loaded. Please check the model file.")
